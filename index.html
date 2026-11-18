@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1220"><meta name="description" content="SignBridge AI — an experimental Indian Sign Language communication assistant.">
+<link rel="manifest" href="/manifest.webmanifest"><link rel="icon" href="/static/icon.svg">
+<title>SignBridge AI | ISL Communication</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080f1c;--panel:#101c2d;--panel2:#14243a;--line:#243750;--muted:#91a4bd;--white:#f3f7fc;--mint:#58e0b5;--blue:#7aaeff;--red:#ff7185}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% -20%,#1c3855 0,transparent 45%),var(--bg);color:var(--white);font:14px 'DM Sans',sans-serif}
+header{height:76px;padding:0 4vw;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#080f1ceF;backdrop-filter:blur(16px);z-index:5}
+.brand{font:700 22px 'Space Grotesk';letter-spacing:-.8px}.brand em{color:var(--mint);font-style:normal}.brand small{display:block;font:11px 'DM Sans';color:var(--muted);letter-spacing:.3px}
+.headright{display:flex;gap:10px;align-items:center}.pill{border:1px solid var(--line);border-radius:30px;padding:7px 11px;color:var(--muted);font-size:12px}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--mint);margin-right:6px}
+main{max-width:1420px;margin:28px auto;padding:0 22px}.intro{display:flex;justify-content:space-between;align-items:end;margin-bottom:22px;gap:16px}.eyebrow{color:var(--mint);font-size:11px;font-weight:700;letter-spacing:1.7px;text-transform:uppercase}.intro h1{font:700 clamp(25px,3vw,36px) 'Space Grotesk';margin:7px 0}.intro p{margin:0;color:var(--muted);max-width:680px;line-height:1.6}
+.layout{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(320px,.85fr);gap:18px}.panel{background:linear-gradient(150deg,#122138,#0e1929);border:1px solid var(--line);border-radius:17px;padding:18px;box-shadow:0 15px 45px #0002}.panelhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}.panel h2{font:600 16px 'Space Grotesk';margin:0}.hint{font-size:12px;color:var(--muted)}
+.camera{position:relative;background:#030812;border:1px solid #273b55;border-radius:12px;overflow:hidden;aspect-ratio:16/10;display:grid;place-items:center}
+video#camera{width:100%;height:100%;object-fit:cover;transform:scaleX(-1);display:none}.camera canvas{position:absolute;width:100%;height:100%;inset:0;pointer-events:none;transform:scaleX(-1)}
+.cameraempty{text-align:center;color:var(--muted);padding:20px}.cameraempty .camicon{font-size:34px;margin-bottom:8px}
+.camerafooter{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:12px;flex-wrap:wrap}
+button{border:0;border-radius:10px;padding:10px 14px;font:600 13px 'DM Sans';cursor:pointer;background:var(--mint);color:#06251b;transition:.15s}button:hover{filter:brightness(1.08);transform:translateY(-1px)}button.secondary{background:#1b304a;color:var(--white);border:1px solid #35506e}button.danger{background:#482733;color:#ffdce2;border:1px solid #75404d}button:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.predrow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:13px}.predbox{background:#0a1727;border:1px solid var(--line);padding:13px;border-radius:11px}.predbox label{display:block;color:var(--muted);font-size:10px;letter-spacing:1px}.predbox strong{font:700 27px 'Space Grotesk';display:block;margin-top:4px;color:var(--mint)}.predbox small{color:var(--muted)}
+.tabs{display:flex;gap:6px;margin:0 0 14px}.tab{background:#0b1728;border:1px solid var(--line);color:var(--muted);padding:8px 11px}.tab.active{background:#1b3c4b;color:var(--mint);border-color:#327866}
+.field{display:flex;flex-direction:column;gap:6px;margin:10px 0}.field label{font-size:12px;color:#c2d0df}.field input,.field select,.field textarea{width:100%;border:1px solid #304762;background:#091626;color:var(--white);border-radius:9px;padding:10px;font:13px 'DM Sans'}.field textarea{min-height:82px;resize:vertical}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.status{color:var(--muted);font-size:12px;min-height:18px;margin-top:9px;line-height:1.5}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:12px 0}.kpi{background:#0a1727;border:1px solid var(--line);border-radius:10px;padding:11px}.kpi span{color:var(--muted);font-size:11px}.kpi b{display:block;font:700 20px 'Space Grotesk';margin-top:4px}
+.classlist{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}.classchip{font-size:11px;padding:5px 8px;background:#1c3049;border-radius:20px;color:#c8d8e9}
+.message{margin-top:18px}.message textarea{width:100%;min-height:95px;background:#091626;color:white;border:1px solid #304762;border-radius:10px;padding:12px;font:15px 'DM Sans';resize:vertical}
+.replygrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}.replygrid .panel{padding:14px}
+.cliplist{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:10px}.clip{background:#091626;border:1px solid var(--line);border-radius:10px;padding:8px}.clip video{width:100%;border-radius:7px;max-height:140px;background:#000}.clip b{font-size:12px}
+footer{max-width:1420px;padding:18px 22px 34px;margin:auto;color:#8093aa;font-size:11px;line-height:1.6}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#18364a;border:1px solid #3e6b7c;border-radius:10px;padding:10px 15px;display:none;z-index:9}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.intro{align-items:flex-start;flex-direction:column}.headright .pill:nth-child(2){display:none}}
+@media(max-width:560px){header{height:65px;padding:0 16px}.brand{font-size:19px}.headright .pill{display:none}main{padding:0 12px;margin:18px auto}.panel{padding:13px}.camera{aspect-ratio:4/3}.replygrid{grid-template-columns:1fr}.predbox strong{font-size:23px}}
+</style>
+</head>
+<body>
+<header>
+ <div class="brand">Sign<em>Bridge</em> AI<small>INDIAN SIGN LANGUAGE • ACCESSIBILITY LAB</small></div>
+ <div class="headright"><span class="pill"><i class="dot"></i>Local prototype</span><span class="pill" id="modelPill">AI model not trained</span><button class="secondary" id="installBtn" hidden>Install app</button></div>
+</header>
+<main>
+ <div class="intro"><div><div class="eyebrow">Communication without barriers</div><h1>Sign, understand, connect.</h1><p>Capture ISL hand movements, train your own sign vocabulary, and bridge sign-to-text, text-to-speech and spoken replies in one workspace.</p></div><div class="pill">Experimental ISL sequence recognition</div></div>
+ <div class="layout">
+  <section>
+   <div class="panel">
+    <div class="panelhead"><h2>Live gesture studio</h2><span class="hint" id="cameraState">Camera not started</span></div>
+    <div class="camera">
+     <video id="camera" autoplay playsinline muted></video><canvas id="overlay"></canvas>
+     <div class="cameraempty" id="cameraEmpty"><div class="camicon">✋</div><b>Camera preview</b><div class="hint">Start the camera and place your hands in view</div></div>
+    </div>
+    <div class="camerafooter"><div class="row"><button id="startCamera">Start camera</button><button class="secondary" id="stopCamera" disabled>Stop</button></div><div class="hint">Good light • hands fully visible • plain background</div></div>
+    <div class="predrow"><div class="predbox"><label>LIVE RECOGNITION</label><strong id="recognized">—</strong><small id="recognitionNote">Train a model to enable predictions</small></div><div class="predbox"><label>CONFIDENCE</label><strong id="confidence">—</strong><small>Model estimate, not a guarantee</small></div></div>
+    <div class="message"><div class="panelhead"><h2>Live transcript</h2><span class="hint">Tap Add to sentence to confirm a sign</span></div><textarea id="transcript" placeholder="Your confirmed signs and letters will appear here."></textarea><div class="row" style="margin-top:9px"><button id="speakTranscript">Speak transcript</button><button class="secondary" id="clearTranscript">Clear</button><button class="secondary" id="copyTranscript">Copy</button></div></div>
+   </div>
+   <div class="replygrid">
+    <div class="panel"><div class="panelhead"><h2>Hear a reply</h2><span class="hint">Speech → text</span></div><div class="field"><textarea id="speechText" placeholder="Spoken words will appear here…"></textarea></div><div class="row"><button id="listenBtn">🎙 Start listening</button><button class="secondary" id="stopListen" disabled>Stop</button></div><div class="status" id="speechStatus">Speech recognition support depends on your browser.</div></div>
+    <div class="panel"><div class="panelhead"><h2>Type a reply</h2><span class="hint">Text → voice</span></div><div class="field"><textarea id="typedReply" placeholder="Type a message for the signer…"></textarea></div><div class="row"><button id="speakReply">🔊 Speak reply</button><button class="secondary" id="copyReply">Copy</button></div></div>
+   </div>
+  </section>
+  <aside>
+   <div class="panel">
+    <div class="panelhead"><h2>Build your ISL model</h2><span class="hint">Local training</span></div>
+    <p class="hint">Record examples of each sign. A sequence includes 24 consecutive hand-landmark frames, so it can represent movement as well as a held pose.</p>
+    <div class="field"><label for="signLabel">Sign label (A–Z or word)</label><input id="signLabel" maxlength="30" placeholder="Example: HELLO, THANK YOU, A"></div>
+    <div class="row"><button id="recordSample" disabled>● Record 24-frame sample</button><button id="trainModel" class="secondary">Train model</button></div>
+    <div class="status" id="recordStatus">Start the camera first. Capture at least 5 examples per sign; 20–50+ varied examples is a better starting point.</div>
+    <div class="kpis"><div class="kpi"><span>Samples</span><b id="sampleCount">0</b></div><div class="kpi"><span>Sign labels</span><b id="classCount">0</b></div><div class="kpi"><span>Video clips</span><b id="clipCount">0</b></div></div>
+    <div class="hint">Collected labels</div><div id="classList" class="classlist"><span class="classchip">No samples yet</span></div>
+    <div class="row" style="margin-top:14px"><button class="secondary" id="resetData">Reset training data</button></div>
+   </div>
+   <div class="panel" style="margin-top:16px">
+    <div class="panelhead"><h2>Text → ISL sign clips</h2><span class="hint">Your reviewed videos</span></div>
+    <p class="hint">Upload short, consented ISL videos for individual signs. The app can play matching clips for words in a typed message. This is a clip library, not an AI-generated sign translation.</p>
+    <form id="clipForm"><div class="field"><label>Sign / word label</label><input name="label" required placeholder="HELLO"></div><div class="field"><label>Video file (MP4 / WEBM / MOV)</label><input name="clip" type="file" accept="video/mp4,video/webm,video/quicktime" required></div><button>Upload sign clip</button></form>
+    <div class="field"><label>Message to show as sign clips</label><input id="clipPhrase" placeholder="HELLO THANK YOU"></div><button class="secondary" id="playPhrase">Find matching clips</button>
+    <div id="clipResults" class="cliplist"></div><div class="status" id="clipStatus"></div>
+   </div>
+  </aside>
+ </div>
+</main>
+<footer>
+ <b>Important:</b> This is a learning and research prototype, not a certified interpreter or a dependable full ISL sentence translator. ISL has its own grammar, regional variation, facial expressions and body movements. A hand-landmark model alone cannot capture all of that. Test with Deaf/native ISL signers and never use it for emergency, legal, medical or other critical communication. Camera processing happens in the browser; captured landmark samples are saved on this server.
+</footer>
+<div id="toast"></div>
+<script type="module">
+import {FilesetResolver, HandLandmarker} from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14";
+const $ = id => document.getElementById(id);
+const SEQ = 24, FRAME_SIZE = 128;
+let stream=null, handLandmarker=null, raf=0, latestFrame=null, sequenceBuffer=[], currentPrediction=null;
+let recognition=null, recognitionActive=false, installPrompt=null, clips=[];
+const video=$("camera"), canvas=$("overlay"), ctx=canvas.getContext("2d");
+
+function toast(msg){$("toast").textContent=msg;$("toast").style.display="block";setTimeout(()=>$("toast").style.display="none",2600)}
+function normalizeLandmarks(landmarks){
+ const slots={Left:Array.from({length:21},()=>[0,0,0]),Right:Array.from({length:21},()=>[0,0,0])};
+ const present={Left:0,Right:0};
+ if(!landmarks||!landmarks.landmarks||!landmarks.handedness)return null;
+ landmarks.landmarks.forEach((hand,i)=>{
+  const side=(landmarks.handedness[i]?.[0]?.categoryName||"Right");
+  const pts=hand.map(p=>[p.x,p.y,p.z]); const wrist=pts[0];
+  let centered=pts.map(p=>[p[0]-wrist[0],p[1]-wrist[1],p[2]-wrist[2]]);
+  const scale=Math.max(...centered.map(p=>Math.hypot(p[0],p[1])),1e-5);
+  centered=centered.map(p=>p.map(v=>v/scale));
+  slots[side]=centered;present[side]=1;
+ });
+ return [...slots.Left.flat(),...slots.Right.flat(),present.Left,present.Right];
+}
+function drawHands(result){
+ const w=video.videoWidth,h=video.videoHeight;if(!w||!h)return;
+ if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h}
+ ctx.clearRect(0,0,w,h);
+ if(!result.landmarks)return;
+ const links=[[0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[5,9],[9,10],[10,11],[11,12],[9,13],[13,14],[14,15],[15,16],[13,17],[17,18],[18,19],[19,20],[0,17]];
+ result.landmarks.forEach(hand=>{
+  ctx.strokeStyle="#58e0b5";ctx.lineWidth=3;
+  links.forEach(([a,b])=>{ctx.beginPath();ctx.moveTo(hand[a].x*w,hand[a].y*h);ctx.lineTo(hand[b].x*w,hand[b].y*h);ctx.stroke()});
+  hand.forEach(p=>{ctx.beginPath();ctx.arc(p.x*w,p.y*h,4,0,Math.PI*2);ctx.fillStyle="#f3f7fc";ctx.fill()});
+ });
+}
+async function initLandmarker(){
+ if(handLandmarker)return;
+ $("cameraState").textContent="Loading hand AI…";
+ const vision=await FilesetResolver.forVisionTasks("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm");
+ handLandmarker=await HandLandmarker.createFromOptions(vision,{baseOptions:{modelAssetPath:"https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task",delegate:"GPU"},runningMode:"VIDEO",numHands:2,minHandDetectionConfidence:.55,minHandPresenceConfidence:.55,minTrackingConfidence:.55});
+}
+async function startCamera(){
+ try{
+  await initLandmarker();
+  stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:"user",width:{ideal:1280},height:{ideal:720}},audio:false});
+  video.srcObject=stream;await video.play();video.style.display="block";$("cameraEmpty").style.display="none";
+  $("startCamera").disabled=true;$("stopCamera").disabled=false;$("recordSample").disabled=false;$("cameraState").textContent="Camera live";loop();
+ }catch(e){$("cameraState").textContent="Camera unavailable";toast("Camera error: "+e.message+" — use localhost or HTTPS and allow camera access.");}
+}
+function stopCamera(){
+ cancelAnimationFrame(raf);if(stream)stream.getTracks().forEach(t=>t.stop());stream=null;video.srcObject=null;video.style.display="none";$("cameraEmpty").style.display="block";
+ $("startCamera").disabled=false;$("stopCamera").disabled=true;$("recordSample").disabled=true;$("cameraState").textContent="Camera stopped";
+}
+function loop(){
+ if(!stream)return;
+ if(video.readyState>=2){
+  const result=handLandmarker.detectForVideo(video,performance.now());drawHands(result);
+  latestFrame=normalizeLandmarks(result);
+  if(latestFrame){sequenceBuffer.push(latestFrame);if(sequenceBuffer.length>SEQ)sequenceBuffer.shift();}
+  else {sequenceBuffer.push(Array(FRAME_SIZE).fill(0));if(sequenceBuffer.length>SEQ)sequenceBuffer.shift();}
+  if(sequenceBuffer.length===SEQ && Date.now()-lastPredict>1100){lastPredict=Date.now();predict(sequenceBuffer.slice());}
+ }
+ raf=requestAnimationFrame(loop);
+}
+let lastPredict=0,lastLabel="",sameCount=0;
+async function predict(seq){
+ try{
+  const r=await fetch("/api/predict",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({sequence:seq})});
+  const j=await r.json();if(!r.ok)return;
+  if(j.confidence>=.72 && j.label===lastLabel)sameCount++;else{lastLabel=j.label;sameCount=1}
+  currentPrediction=j;
+  $("recognized").textContent=j.label;$("confidence").textContent=Math.round(j.confidence*100)+"%";
+  $("recognitionNote").textContent=sameCount>=2?"Stable prediction — confirm before adding":"Checking consistency…";
+ }catch(e){}
+}
+async function api(url,body){
+ const r=await fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body||{})});
+ const j=await r.json();if(!r.ok)throw Error(j.error||"Request failed");return j;
+}
+$("startCamera").onclick=startCamera;$("stopCamera").onclick=stopCamera;
+$("recordSample").onclick=async()=>{
+ const label=$("signLabel").value.trim().toUpperCase();
+ if(!label){toast("Enter a sign label first.");return}
+ if(sequenceBuffer.length<SEQ){toast("Wait for the camera to collect a full sequence.");return}
+ $("recordSample").disabled=true;$("recordStatus").textContent="Capturing 24-frame sequence…";
+ try{const j=await api("/api/samples",{label,sequence:sequenceBuffer.slice(-SEQ)});$("recordStatus").textContent=`Saved ${j.count} example(s) for ${label}. Repeat with varied speed, position and signer.`;await refreshStatus();}
+ catch(e){$("recordStatus").textContent=e.message}finally{$("recordSample").disabled=!stream}
+};
+$("trainModel").onclick=async()=>{
+ $("recordStatus").textContent="Training temporal sequence classifier…";
+ try{const j=await api("/api/train");$("recordStatus").textContent=`Trained ${j.classes.length} labels on ${j.samples} sequences. Hold-out accuracy: ${j.accuracy}%. This is not real-world accuracy.`;await refreshStatus();toast("Model training completed");}
+ catch(e){$("recordStatus").textContent=e.message}
+};
+$("resetData").onclick=async()=>{if(!confirm("Delete all captured training sequences and the trained model?"))return;try{await api("/api/reset");$("recordStatus").textContent="Training data reset.";await refreshStatus()}catch(e){toast(e.message)}};
+function speak(t){if(!t.trim())return;if(!("speechSynthesis" in window)){toast("Text-to-speech is not supported in this browser.");return}speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(t);u.lang="en-IN";speechSynthesis.speak(u)}
+$("speakTranscript").onclick=() => speak($("transcript").value);
+$("speakReply").onclick=() => speak($("typedReply").value);
+$("clearTranscript").onclick=()=>$("transcript").value="";
+$("copyTranscript").onclick=()=>navigator.clipboard?.writeText($("transcript").value).then(()=>toast("Transcript copied"));
+$("copyReply").onclick=()=>navigator.clipboard?.writeText($("typedReply").value).then(()=>toast("Reply copied"));
+$("listenBtn").onclick=()=>{
+ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+ if(!SR){$("speechStatus").textContent="Speech recognition is not available in this browser. Try Chrome.";return}
+ recognition=new SR();recognition.lang="en-IN";recognition.continuous=true;recognition.interimResults=true;
+ recognition.onresult=e=>{let text="";for(let i=e.resultIndex;i<e.results.length;i++)text+=e.results[i][0].transcript;$("speechText").value=text};
+ recognition.onerror=e=>$("speechStatus").textContent="Speech recognition: "+e.error;
+ recognition.onend=()=>{recognitionActive=false;$("listenBtn").disabled=false;$("stopListen").disabled=true};
+ recognition.start();recognitionActive=true;$("listenBtn").disabled=true;$("stopListen").disabled=false;$("speechStatus").textContent="Listening…";
+};
+$("stopListen").onclick=()=>{if(recognition)recognition.stop()};
+$("speechText").addEventListener("change",()=>{if($("speechText").value.trim())$("typedReply").value=$("speechText").value});
+
+async function refreshStatus(){
+ const s=await (await fetch("/api/status")).json();
+ $("sampleCount").textContent=s.samples;$("classCount").textContent=Object.keys(s.classes).length;$("clipCount").textContent=s.clips;
+ $("modelPill").textContent=s.model_ready?"AI model trained":"AI model not trained";
+ $("recognitionNote").textContent=s.model_ready?"Model ready — confirm predictions":"Train a model to enable predictions";
+ $("classList").innerHTML=Object.entries(s.classes).map(([k,v])=>`<span class="classchip">${escapeHtml(k)} · ${v}</span>`).join("")||'<span class="classchip">No samples yet</span>';
+}
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+$("clipForm").onsubmit=async e=>{
+ e.preventDefault();const fd=new FormData(e.target);
+ try{const r=await fetch("/api/clips",{method:"POST",body:fd});const j=await r.json();if(!r.ok)throw Error(j.error);$("clipStatus").textContent=`Uploaded reviewed sign clip: ${j.label}`;e.target.reset();await loadClips();}
+ catch(err){$("clipStatus").textContent=err.message}
+};
+async function loadClips(){clips=(await (await fetch("/api/clips")).json()).clips;$("clipCount").textContent=clips.length}
+$("playPhrase").onclick=()=>{
+ const words=$("clipPhrase").value.toUpperCase().split(/[^A-Z0-9]+/).filter(Boolean);
+ const found=words.map(w=>clips.find(c=>c.label.toUpperCase()===w)).filter(Boolean);
+ $("clipResults").innerHTML=found.map(c=>`<div class="clip"><b>${escapeHtml(c.label)}</b><video src="${c.url}" controls playsinline></video></div>`).join("");
+ $("clipStatus").textContent=found.length?`Found ${found.length} matching clip(s). Missing words are not auto-translated.`:"No matching reviewed sign clips found.";
+};
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();installPrompt=e;$("installBtn").hidden=false});
+$("installBtn").onclick=async()=>{if(!installPrompt)return;installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;$("installBtn").hidden=true};
+if("serviceWorker" in navigator)navigator.serviceWorker.register("/sw.js").catch(()=>{});
+$("recognized").addEventListener("dblclick",()=>{if(currentPrediction?.label)$("transcript").value+=($("transcript").value?" ":"")+currentPrediction.label});
+await refreshStatus();await loadClips();
+</script>
+</body></html>
