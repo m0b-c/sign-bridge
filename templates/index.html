@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101827">
+  <title>Sign Bridge — Sign Language Studio</title>
+  <style>
+    :root{color-scheme:dark;--bg:#0b1220;--panel:#121d2e;--panel2:#18263a;--line:#263750;--text:#edf4ff;--muted:#9aacc4;--accent:#65d6b3;--blue:#83a9ff;--danger:#ff7e88}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(1000px 500px at 80% -10%,#1d3554 0%,transparent 65%),var(--bg);color:var(--text);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
+    .wrap{max-width:1180px;margin:auto;padding:28px 20px 60px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px}.brand{display:flex;align-items:center;gap:12px}.logo{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--accent),#80a9ff);display:grid;place-items:center;color:#081321;font-size:23px;font-weight:900}.brand h1{font-size:20px;margin:0}.brand p{margin:2px 0 0;color:var(--muted);font-size:13px}
+    .pill{border:1px solid var(--line);border-radius:99px;padding:7px 12px;color:var(--muted);font-size:12px}.hero{margin:18px 0 24px}.eyebrow{color:var(--accent);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}.hero h2{font-size:clamp(28px,5vw,42px);line-height:1.1;letter-spacing:-.04em;margin:8px 0}.hero p{color:var(--muted);max-width:680px;margin:0}
+    .grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(300px,.75fr);gap:18px}.panel{background:linear-gradient(180deg,rgba(24,38,58,.96),rgba(18,29,46,.96));border:1px solid var(--line);border-radius:20px;padding:18px;min-width:0}.panel h3{margin:0 0 4px;font-size:17px}.sub{color:var(--muted);font-size:13px;margin:0 0 16px}.video-box{position:relative;background:#050a12;border:1px solid var(--line);border-radius:15px;overflow:hidden;aspect-ratio:16/10;display:grid;place-items:center}.video-box video{width:100%;height:100%;object-fit:cover;transform:scaleX(-1);display:none}.placeholder{color:var(--muted);text-align:center;padding:25px}.placeholder strong{display:block;color:var(--text);font-size:16px;margin-bottom:5px}.live{position:absolute;top:12px;left:12px;background:#101b2bdb;border:1px solid var(--line);border-radius:99px;padding:5px 9px;font-size:11px;color:var(--accent)}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.btn{border:1px solid var(--line);border-radius:11px;padding:10px 14px;background:#1c2c43;color:var(--text);font:inherit;font-weight:700;cursor:pointer}.btn.primary{background:var(--accent);border-color:var(--accent);color:#092018}.btn:disabled{opacity:.45;cursor:not-allowed}.btn.danger{color:#ff9da4}.field{display:grid;gap:6px;margin:14px 0}.field label{font-size:12px;color:var(--muted);font-weight:700}.field input{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 12px;background:#0d1726;color:var(--text);font:inherit;outline:none}.field input:focus{border-color:var(--blue)}.progress{height:8px;border-radius:99px;background:#0b1422;overflow:hidden;margin:12px 0}.progress span{height:100%;display:block;width:0;background:linear-gradient(90deg,var(--accent),var(--blue));transition:width .15s}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:14px 0}.stat{background:#0d1726;border:1px solid var(--line);border-radius:12px;padding:11px}.stat strong{font-size:21px;display:block}.stat span{color:var(--muted);font-size:11px}.message{margin-top:12px;border-radius:10px;padding:10px 12px;background:#0d1726;border:1px solid var(--line);color:var(--muted);font-size:13px;min-height:42px}.message.error{color:#ffadb2;border-color:#70414a}.message.good{color:var(--accent);border-color:#285b50}.class-list{display:flex;flex-wrap:wrap;gap:7px}.tag{background:#20334d;border:1px solid #304966;border-radius:99px;padding:5px 9px;font-size:12px}.divider{height:1px;background:var(--line);margin:18px 0}.small{font-size:12px;color:var(--muted)}.rightcol{display:grid;gap:18px}.result{font-size:25px;font-weight:800;letter-spacing:-.03em;margin:5px 0}.cliprow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px}.cliprow:last-child{border:0}
+    @media(max-width:820px){.grid{grid-template-columns:1fr}.top{align-items:flex-start}.pill{display:none}}@media(max-width:460px){.wrap{padding:18px 13px 40px}.panel{padding:14px}.stats{grid-template-columns:repeat(3,1fr)}.btn{flex:1}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="top">
+      <div class="brand"><div class="logo">S</div><div><h1>Sign Bridge</h1><p>Sign Language Studio</p></div></div>
+      <div class="pill">LOCAL CAMERA · SEQUENCE LEARNING</div>
+    </header>
+    <section class="hero">
+      <div class="eyebrow">Build · Learn · Communicate</div>
+      <h2>Turn hand movements<br>into understanding.</h2>
+      <p>Capture sign examples, train a lightweight personal recognizer, and test predictions live. Your browser sends landmark sequences to this app—not raw camera frames—when you save a sample.</p>
+    </section>
+    <div class="grid">
+      <section class="panel">
+        <h3>Live camera</h3><p class="sub">Allow camera access, then position your hands inside the frame.</p>
+        <div class="video-box">
+          <video id="video" playsinline muted></video>
+          <div class="placeholder" id="placeholder"><strong>Camera is not running</strong>Start the camera to capture hand landmarks.</div>
+          <div class="live" id="liveBadge">● CAMERA OFF</div>
+        </div>
+        <div class="actions">
+          <button class="btn primary" id="cameraBtn">Start camera</button>
+          <button class="btn" id="predictBtn" disabled>Predict current sign</button>
+        </div>
+        <div class="message" id="cameraMessage" role="status">Camera permission is only requested when you press Start camera.</div>
+        <div class="divider"></div>
+        <h3>Collect a training example</h3><p class="sub">Each example contains exactly {{ sequence_frames }} frames. Record at least 5 examples for each of 2 or more labels before training.</p>
+        <div class="field"><label for="label">SIGN LABEL</label><input id="label" maxlength="30" placeholder="e.g. HELLO" autocomplete="off"></div>
+        <div class="progress"><span id="captureProgress"></span></div>
+        <div class="small" id="captureText">Ready for {{ sequence_frames }} frames</div>
+        <div class="actions"><button class="btn primary" id="captureBtn" disabled>Capture {{ sequence_frames }} frames</button><button class="btn" id="saveBtn" disabled>Save example</button></div>
+        <div class="message" id="captureMessage" role="status">Start the camera before collecting examples.</div>
+      </section>
+      <aside class="rightcol">
+        <section class="panel">
+          <h3>Training workspace</h3><p class="sub">Your saved samples and trained model status.</p>
+          <div class="stats">
+            <div class="stat"><strong id="sampleCount">0</strong><span>EXAMPLES</span></div>
+            <div class="stat"><strong id="classCount">0</strong><span>LABELS</span></div>
+            <div class="stat"><strong id="clipCount">0</strong><span>VIDEO CLIPS</span></div>
+          </div>
+          <div class="small" style="margin-bottom:8px">COLLECTED LABELS</div><div class="class-list" id="classList"><span class="small">No samples yet.</span></div>
+          <div class="divider"></div>
+          <button class="btn primary" id="trainBtn" style="width:100%">Train recognition model</button>
+          <div class="message" id="trainMessage" role="status">Requires at least 5 examples for each of 2 labels.</div>
+        </section>
+        <section class="panel">
+          <h3>Prediction</h3><p class="sub">Run the latest 24-frame sequence through your trained model.</p>
+          <div class="small">PREDICTED SIGN</div><div class="result" id="prediction">—</div>
+          <div class="small" id="confidence">No prediction yet.</div>
+        </section>
+        <section class="panel">
+          <h3>Video examples</h3><p class="sub">Optional reference clips can be uploaded by label.</p>
+          <form id="clipForm">
+            <div class="field"><label for="clipLabel">CLIP LABEL</label><input id="clipLabel" maxlength="30" placeholder="e.g. HELLO"></div>
+            <div class="field"><label for="clipFile">VIDEO FILE (MP4, WEBM, MOV)</label><input id="clipFile" type="file" accept="video/mp4,video/webm,video/quicktime"></div>
+            <button class="btn" type="submit">Upload video</button>
+          </form>
+          <div id="clipList" class="small" style="margin-top:12px">No clips uploaded.</div>
+          <div class="message" id="clipMessage" role="status">Video uploads are stored on the server's configured data directory.</div>
+        </section>
+        <section class="panel">
+          <h3>Data controls</h3><p class="sub">Reset removes saved landmark examples and the trained model from the configured data directory.</p>
+          <button class="btn danger" id="resetBtn">Reset training data</button>
+        </section>
+      </aside>
+    </div>
+    <p class="small" style="text-align:center;margin-top:24px">Sign Bridge · Camera processing uses MediaPipe Hands in your browser.</p>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+  <script>
+    const FRAME_COUNT = {{ sequence_frames }};
+    const FEATURES = 128;
+    const $ = id => document.getElementById(id);
+    let stream = null, hands = null, latestFeatures = null, frameBuffer = [], capturedSequence = null, cameraLoop = false, predicting = false;
+    const setMessage = (id, text, type='') => { const el=$(id); el.textContent=text; el.className='message '+type; };
+    const validLabel = value => /^[A-Z0-9][A-Z0-9 _'-]{0,29}$/.test(value.trim().toUpperCase());
+    function featuresFromResults(results) {
+      const handsBySide = {Left:null,Right:null};
+      (results.multiHandLandmarks || []).forEach((landmarks, i) => {
+        const side = results.multiHandedness?.[i]?.label;
+        if (side && handsBySide[side] === null) handsBySide[side] = landmarks;
+      });
+      const out=[];
+      for (const side of ['Left','Right']) {
+        const points=handsBySide[side];
+        if (points) points.forEach(p=>out.push(p.x,p.y,p.z));
+        else for(let i=0;i<63;i++) out.push(0);
+      }
+      out.push(handsBySide.Left?1:0,handsBySide.Right?1:0);
+      return out.length===FEATURES?out:null;
+    }
+    async function refreshStatus() {
+      try {
+        const r=await fetch('/api/status'); const d=await r.json();
+        $('sampleCount').textContent=d.samples ?? 0;
+        const entries=Object.entries(d.classes || {}); $('classCount').textContent=entries.length;
+        $('classList').innerHTML=entries.length?entries.map(([name,count])=>'<span class="tag">'+name+' · '+count+'</span>').join(''):'<span class="small">No samples yet.</span>';
+        $('clipCount').textContent=d.clips ?? 0;
+        $('trainMessage').textContent=d.model_ready?'A trained model is loaded and ready.':'Collect 5+ examples for each of at least 2 labels, then train.';
+      } catch(e) { setMessage('trainMessage','Could not load workspace status: '+e.message,'error'); }
+      try {
+        const r=await fetch('/api/clips'); const d=await r.json();
+        $('clipList').innerHTML=(d.clips||[]).length?(d.clips||[]).map(c=>'<div class="cliprow"><span>'+c.label+'</span><a href="'+c.url+'" target="_blank" rel="noopener">Open clip ↗</a></div>').join(''):'No clips uploaded.';
+      } catch(e) {}
+    }
+    async function startCamera() {
+      if (!navigator.mediaDevices?.getUserMedia) { setMessage('cameraMessage','Camera access is unavailable. Use HTTPS and a supported browser.','error'); return; }
+      try {
+        stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:640},height:{ideal:480}},audio:false});
+        $('video').srcObject=stream; await $('video').play(); $('video').style.display='block'; $('placeholder').style.display='none';
+        hands=new Hands({locateFile:file=>'https://cdn.jsdelivr.net/npm/@mediapipe/hands/'+file});
+        hands.setOptions({maxNumHands:2,modelComplexity:1,minDetectionConfidence:.55,minTrackingConfidence:.5});
+        hands.onResults(results=>{latestFeatures=featuresFromResults(results);});
+        cameraLoop=true; $('cameraBtn').textContent='Stop camera'; $('liveBadge').textContent='● CAMERA ON'; $('predictBtn').disabled=false; $('captureBtn').disabled=false;
+        setMessage('cameraMessage','Camera is running. Keep your hands visible in the frame.','good');
+        const process=async()=>{if(!cameraLoop)return;if($('video').readyState>=2&&!predicting){predicting=true;try{await hands.send({image:$('video')});}catch(e){}predicting=false;}requestAnimationFrame(process);}; process();
+      } catch(e) { setMessage('cameraMessage','Could not start camera: '+e.message,'error'); stopCamera(); }
+    }
+    function stopCamera() {
+      cameraLoop=false; if(stream)stream.getTracks().forEach(t=>t.stop()); stream=null;
+      if(hands){hands.close();hands=null;} $('video').srcObject=null;$('video').style.display='none';$('placeholder').style.display='block';
+      $('cameraBtn').textContent='Start camera';$('liveBadge').textContent='● CAMERA OFF';$('predictBtn').disabled=true;$('captureBtn').disabled=true;
+    }
+    $('cameraBtn').addEventListener('click',()=>stream?stopCamera():startCamera());
+    $('captureBtn').addEventListener('click',async()=>{
+      if(!latestFeatures){setMessage('captureMessage','No hands detected yet. Place one or both hands in view.','error');return;}
+      $('captureBtn').disabled=true; frameBuffer=[];capturedSequence=null;$('saveBtn').disabled=true;
+      for(let i=0;i<FRAME_COUNT;i++){
+        if(!cameraLoop)break;
+        if(latestFeatures)frameBuffer.push([...latestFeatures]);
+        $('captureProgress').style.width=(frameBuffer.length/FRAME_COUNT*100)+'%';
+        $('captureText').textContent='Capturing frame '+frameBuffer.length+' of '+FRAME_COUNT;
+        await new Promise(resolve=>setTimeout(resolve,100));
+      }
+      if(frameBuffer.length===FRAME_COUNT){capturedSequence=frameBuffer; $('saveBtn').disabled=false;setMessage('captureMessage','Sequence captured. Save it to add this example to your dataset.','good');}
+      else setMessage('captureMessage','Capture interrupted. Start the camera and try again.','error');
+      $('captureBtn').disabled=!cameraLoop;
+    });
+    $('saveBtn').addEventListener('click',async()=>{
+      const label=$('label').value.trim().toUpperCase();
+      if(!validLabel(label)){setMessage('captureMessage','Enter a valid label using letters, numbers, spaces, apostrophes, hyphens or underscores.','error');return;}
+      if(!capturedSequence)return;
+      $('saveBtn').disabled=true;
+      try{const r=await fetch('/api/samples',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({label,sequence:capturedSequence})});const d=await r.json();if(!r.ok)throw Error(d.error||'Could not save sample');setMessage('captureMessage','Saved '+label+' example. '+d.count+' example(s) for this label.','good');capturedSequence=null;$('captureProgress').style.width='0%';$('captureText').textContent='Ready for '+FRAME_COUNT+' frames';await refreshStatus();}
+      catch(e){setMessage('captureMessage',e.message,'error');$('saveBtn').disabled=false;}
+    });
+    $('trainBtn').addEventListener('click',async()=>{
+      $('trainBtn').disabled=true;setMessage('trainMessage','Training model… this may take a little while.');
+      try{const r=await fetch('/api/train',{method:'POST'});const d=await r.json();if(!r.ok)throw Error(d.error||'Training failed');setMessage('trainMessage','Model trained. Test a sign using Predict current sign. Accuracy on held-out examples: '+d.accuracy+'%.','good');}
+      catch(e){setMessage('trainMessage',e.message,'error');}finally{$('trainBtn').disabled=false;}
+    });
+    $('predictBtn').addEventListener('click',async()=>{
+      if(!cameraLoop){setMessage('cameraMessage','Start the camera first.','error');return;}
+      $('predictBtn').disabled=true;setMessage('cameraMessage','Collecting a fresh '+FRAME_COUNT+'-frame sequence for prediction…');
+      const seq=[];for(let i=0;i<FRAME_COUNT;i++){if(latestFeatures)seq.push([...latestFeatures]);await new Promise(resolve=>setTimeout(resolve,100));}
+      try{const r=await fetch('/api/predict',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sequence:seq})});const d=await r.json();if(!r.ok)throw Error(d.error||'Prediction failed');$('prediction').textContent=d.label;$('confidence').textContent='Confidence: '+(d.confidence*100).toFixed(1)+'%';setMessage('cameraMessage','Prediction complete.','good');}
+      catch(e){setMessage('cameraMessage',e.message,'error');}finally{$('predictBtn').disabled=!cameraLoop;}
+    });
+    $('clipForm').addEventListener('submit',async e=>{
+      e.preventDefault();const label=$('clipLabel').value.trim().toUpperCase(),file=$('clipFile').files[0];
+      if(!validLabel(label)||!file){setMessage('clipMessage','Enter a valid label and choose a video file.','error');return;}
+      const form=new FormData();form.append('label',label);form.append('clip',file);
+      try{const r=await fetch('/api/clips',{method:'POST',body:form});const d=await r.json();if(!r.ok)throw Error(d.error||'Upload failed');setMessage('clipMessage','Uploaded clip for '+label+'.','good');$('clipForm').reset();await refreshStatus();}
+      catch(err){setMessage('clipMessage',err.message,'error');}
+    });
+    $('resetBtn').addEventListener('click',async()=>{
+      if(!confirm('Delete all saved landmark samples and the trained model?'))return;
+      try{const r=await fetch('/api/reset',{method:'POST'});const d=await r.json();if(!r.ok)throw Error(d.error||'Reset failed');$('prediction').textContent='—';$('confidence').textContent='No prediction yet.';setMessage('trainMessage','Training data reset.','good');await refreshStatus();}
+      catch(e){setMessage('trainMessage',e.message,'error');}
+    });
+    window.addEventListener('beforeunload',stopCamera);
+    refreshStatus();
+  </script>
+</body>
+</html>
