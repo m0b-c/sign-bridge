@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.py[cod]
+.env
+.vercel/
+data/*.json
+data/*.joblib
+data/sign_clips/*
+!data/sign_clips/.gitkeep
